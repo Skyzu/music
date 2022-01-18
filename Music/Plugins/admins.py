@@ -218,12 +218,12 @@ async def stop_cmd(_, message):
                 photo=thumb,
                     reply_markup=InlineKeyboardMarkup(buttons),
                     caption=f"""
-<b>⏭️ 𝐌𝐞𝐥𝐞𝐰𝐚𝐭𝐢 𝐩𝐞𝐦𝐮𝐭𝐚𝐫𝐚𝐧 𝐥𝐚𝐠𝐮 </b>
+<b>⏭️ Melewati Pemutaran Lagu </b>
 
-<b>🏷 𝐍𝐚𝐦𝐚 :</b>{title[:70]}
-<b>⏱️ 𝐃𝐮𝐫𝐚𝐬𝐢 :</b> {duration} `Menit`
-<b>🎧 𝐀𝐭𝐚𝐬 𝐩𝐞𝐫𝐦𝐢𝐧𝐭𝐚𝐚𝐧 :</b> {semx.mention}
-<b>⚡ 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐛𝐲 :</b>[𝐒𝐭𝐞𝐫𝐞𝐨 𝐏𝐫𝐨𝐣𝐞𝐜𝐭](https://t.me/infobotmusik)
+<b>🏷️ Nama :</b>{title[:70]}
+<b>⏱️ Durasi :</b> `{duration}` `Menit`
+<b>🎧 Atas Permintaan :</b> {username}
+<b>⚡ powered by :</b>[𝐒𝐭𝐞𝐫𝐞𝐨 𝐏𝐫𝐨𝐣𝐞𝐜𝐭](https://t.me/infobotmusik)
 """,
                 )
                 os.remove(thumb)
