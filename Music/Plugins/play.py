@@ -248,7 +248,7 @@ Unban terlebih dahulu untuk menggunakanya
         what = "Audio Searched"
         await LOG_CHAT(message, what)
         mystic = await message.reply_text(
-            f"**🔄 Sedang Memproses Audio Atas Permintaan {username}**"
+            f"**🔄 Sedang Memproses Audio Atas Permintaan Dari {username}**"
         )
         if audio.file_size > 157286400:
             await mystic.edit_text("Ukuran File Audio Harus Kurang dari 150 mb")
@@ -399,7 +399,7 @@ Unban terlebih dahulu untuk menggunakanya
                 """
 <b>❌ Lagu tidak ditemukan! Coba cari dengan judul lagu yang lebih jelas..
 
-✅ Contoh » `/play jentaka`
+✅ Contoh » `/play desahan manja`
 """,
             )
             return
@@ -430,7 +430,7 @@ Unban terlebih dahulu untuk menggunakanya
                   """
 <b>❌ Lagu tidak ditemukan! Coba cari dengan judul lagu yang lebih jelas..
 
-✅ Contoh » `/play jentaka`
+✅ Contoh » `/play desahan manja`
 """,
         )
         thumb = "cache/Results.png"
@@ -456,27 +456,27 @@ Unban terlebih dahulu untuk menggunakanya
 1️⃣ <b>{title1[:70]}</b>
 ├ 💡 [More Information](https://t.me/{BOT_USERNAME}?start=info_{ID3})
 ├ ⚡ **Powered by :** [{BOT_NAME}](t.me/{BOT_USERNAME})
-└ ☕ **Manage by :** [𝐚𝐫𝐢](https://t.me/SilenceSpe4ks)
+└ ☕ **Manage by :** [Skyzu](https://t.me/skyzusupport)
 
 2️⃣ <b>{title2[:70]}</b>
 ├ 💡 [More Information](https://t.me/{BOT_USERNAME}?start=info_{ID3})
 ├ ⚡ **Powered by :** [{BOT_NAME}](t.me/{BOT_USERNAME})
-└ ☕ **Manage by :** [𝐚𝐫𝐢](https://t.me/SilenceSpe4ks)
+└ ☕ **Manage by :** [Skyzu](https://t.me/skyzusupport)
 
 3️⃣ <b>{title3[:70]}</b>
 ├ 💡 [More Information](https://t.me/{BOT_USERNAME}?start=info_{ID3})
 ├ ⚡ **Powered by :** [{BOT_NAME}](t.me/{BOT_USERNAME})
-└ ☕ **Manage by :** [𝐚𝐫𝐢](https://t.me/SilenceSpe4ks)
+└ ☕ **Manage by :** [Skyzu](https://t.me/skyzusupport)
 
 4️⃣ <b>{title4[:70]}</b>
 ├ 💡 [More Information](https://t.me/{BOT_USERNAME}?start=info_{ID4})
 ├ ⚡ **Powered by :** [{BOT_NAME}](t.me/{BOT_USERNAME})
-└ ☕ **Manage by :** [𝐚𝐫𝐢](https://t.me/SilenceSpe4ks)
+└ ☕ **Manage by :** [Skyzu](https://t.me/skyzusupport)
 
 5️⃣ <b>{title5[:70]}</b>
 ├ 💡 [More Information](https://t.me/{BOT_USERNAME}?start=info_{ID5})
 ├ ⚡ **Powered by :** [{BOT_NAME}](t.me/{BOT_USERNAME})
-└ ☕ **Manage by :** [𝐚𝐫𝐢](https://t.me/SilenceSpe4ks)
+└ ☕ **Manage by :** [Skyzu](https://t.me/skyzusupport)
 """,
             reply_markup=InlineKeyboardMarkup(buttons),
         )
@@ -553,10 +553,10 @@ Unban terlebih dahulu untuk menggunakanya
             photo=thumb,
             reply_markup=InlineKeyboardMarkup(buttons),
             caption=f"""
-<b>🏷 𝐍𝐚𝐦𝐚 :</b> [{title[:100]}]({link})
-<b>⏱️ 𝐃𝐮𝐫𝐚𝐬𝐢 :</b> {duration}
-<b>🎧 𝐀𝐭𝐚𝐬 𝐩𝐞𝐫𝐦𝐢𝐧𝐭𝐚𝐚𝐧 :</b> {checking}
-<b>⚡ 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐛𝐲 : [𝐒𝐭𝐞𝐫𝐞𝐨 𝐏𝐫𝐨𝐣𝐞𝐜𝐭](https://t.me/infobotmusik)
+<b>🏷 Nama :</b> [{title[:100]}]({link})
+<b>⏱️ Durasi :</b> {duration}
+<b>🎧 Atas permintaan :</b> {checking}
+<b>⚡ Powered by : [𝐒𝐭𝐞𝐫𝐞𝐨 𝐏𝐫𝐨𝐣𝐞𝐜𝐭](https://t.me/infobotmusik)
 """,
         )
         return await mystic.delete()
@@ -706,11 +706,11 @@ async def startyuplay(_, CallbackQuery):
             caption=f"""
 <b>» 𝐌𝐞𝐧𝐚𝐦𝐛𝐚𝐡𝐤𝐚𝐧 𝐤𝐞 𝐝𝐚𝐟𝐭𝐚𝐫 𝐚𝐧𝐭𝐫𝐢𝐚𝐧 𝐥𝐚𝐠𝐮</b>
 
-<b>🏷 𝐍𝐚𝐦𝐚 :</b>[{title[:100]}]({url})
-<b>⏱️ 𝐃𝐮𝐫𝐚𝐬𝐢 :</b> `{duration}` `Menit`
-<b>💡 𝐒𝐭𝐚𝐭𝐮𝐬 : `Dalam antrian`
-<b>🎧 𝐀𝐭𝐚𝐬 𝐩𝐞𝐫𝐦𝐢𝐧𝐭𝐚𝐚𝐧 :</b> {checking}
-<b>🔢 𝐏𝐨𝐬𝐢𝐬𝐢 𝐚𝐧𝐭𝐫𝐢𝐚𝐧 𝐤𝐞 »</b> `{position}`
+<b>🏷 Nama :</b>[{title[:100]}]({url})
+<b>⏱️ Durasi :</b> `{duration}` `Menit`
+<b>💡 Status : `Dalam antrian`
+<b>🎧 Atas permintaan :</b> {checking}
+<b>🔢 Posisi antrian ke »</b> `{position}`
 """,
             reply_markup=InlineKeyboardMarkup(buttons),
         )
@@ -734,11 +734,11 @@ async def startyuplay(_, CallbackQuery):
             photo=thumb,
             reply_markup=InlineKeyboardMarkup(buttons),
             caption=f"""
-<b>🏷 𝐍𝐚𝐦𝐚 :</b> [{title[:100]}]({url})
-<b>⏱️ 𝐃𝐮𝐫𝐚𝐬𝐢 :</b> `{duration}` `Menit`
-<b>💡 𝐒𝐭𝐚𝐭𝐮𝐬 : `Sedang memutar`
-<b>🎧 𝐀𝐭𝐚𝐬 𝐩𝐞𝐫𝐦𝐢𝐧𝐭𝐚𝐚𝐧 :</b> {checking}
-<b>⚡ 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐛𝐲 :</b> [𝐒𝐭𝐞𝐫𝐞𝐨 𝐏𝐫𝐨𝐣𝐞𝐜𝐭](https://t.me/infobotmusik)
+<b>🏷 Nama :</b> [{title[:100]}]({url})
+<b>⏱️ Durasi :</b> `{duration}` `Menit`
+<b>💡 Status : `Sedang memutar`
+<b>🎧 Atas permintaan :</b> {checking}
+<b>⚡ Powered by :</b> [𝐒𝐭𝐞𝐫𝐞𝐨 𝐏𝐫𝐨𝐣𝐞𝐜𝐭](https://t.me/infobotmusik)
 """,
         )
         os.remove(thumb)
@@ -822,27 +822,27 @@ async def popat(_, CallbackQuery):
 6️⃣ <b>{title6[:100]}</b>
 ├ 💡 [More Information](https://t.me/{BOT_USERNAME}?start=info_{ID6})
 ├ ⚡ **Powered by :** [{BOT_NAME}](t.me/{BOT_USERNAME})
-└ ☕ **Manage by :** [𝐚𝐫𝐢](https://t.me/SilenceSpe4ks)
+└ ☕ **Manage by :**  [Skyzu](https://t.me/skyzusupport)
 
 7️⃣ <b>{title7[:100]}</b>
 ├ 💡 [More Information](https://t.me/{BOT_USERNAME}?start=info_{ID7})
 ├ ⚡ **Manage by :** [{BOT_NAME}](t.me/{BOT_USERNAME})
-└ ☕ **Manage by :** [𝐚𝐫𝐢](https://t.me/SilenceSpe4ks)
+└ ☕ **Manage by :**  [Skyzu](https://t.me/skyzusupport)
 
 8️⃣ <b>{title8[:100]}</b>
 ├ 💡 [More Information](https://t.me/{BOT_USERNAME}?start=info_{ID8})
 ├ ⚡ **Powered by:** [{BOT_NAME}](t.me/{BOT_USERNAME})
-└ ☕ **Manage by :** [𝐚𝐫𝐢](https://t.me/SilenceSpe4ks)
+└ ☕ **Manage by :**  [Skyzu](https://t.me/skyzusupport)
 
 9️⃣ <b>{title9[:100]}</b>
 ├ 💡 [More Information](https://t.me/{BOT_USERNAME}?start=info_{ID9})
 ├ ⚡ **Powered by :** [{BOT_NAME}](t.me/{BOT_USERNAME})
-└ ☕ **Manage by :** [𝐚𝐫𝐢](https://t.me/SilenceSpe4ks)
+└ ☕ **Manage by :**  [Skyzu](https://t.me/skyzusupport)
 
 🔟 <b>{title10[:100]}</b>
 ├ 💡 [More Information](https://t.me/{BOT_USERNAME}?start=info_{ID10})
 ├ ⚡ **Powered by :** [{BOT_NAME}](t.me/{BOT_USERNAME})
-└ ☕ **Manage by :** [𝐚𝐫𝐢](https://t.me/SilenceSpe4ks)
+└ ☕ **Manage by :**  [Skyzu](https://t.me/skyzusupport)
 """,
             reply_markup=InlineKeyboardMarkup(buttons),
         )
@@ -870,27 +870,27 @@ async def popat(_, CallbackQuery):
 1️⃣ <b>{title1[:100]}</b>
 ├ 💡 [More Information](https://t.me/{BOT_USERNAME}?start=info_{ID1})
 ├ ⚡ **powered by:** [{BOT_NAME}](t.me/{BOT_USERNAME})
-└ ☕ **manage by :** [𝐚𝐫𝐢](https://t.me/SilenceSpe4ks)
+└ ☕ **manage by :**  [Skyzu](https://t.me/skyzusupport)
 
 2️⃣ <b>{title2[:100]}</b>
 ├ 💡 [More Information](https://t.me/{BOT_USERNAME}?start=info_{ID2})
 ├ ⚡ **powered by :** [{BOT_NAME}](t.me/{BOT_USERNAME})
-└ ☕ **manage by :** [𝐚𝐫𝐢](https://t.me/SilenceSpe4ks)
+└ ☕ **manage by :**  [Skyzu](https://t.me/skyzusupport)
 
 3️⃣ <b>{title3[:100]}</b>
 ├ 💡 [More Information](https://t.me/{BOT_USERNAME}?start=info_{ID3})
 ├ ⚡ **powered by:** [{BOT_NAME}](t.me/{BOT_USERNAME})
-└ ☕ **manage by :** [𝐚𝐫𝐢](https://t.me/SilenceSpe4ks)
+└ ☕ **manage by :**  [Skyzu](https://t.me/skyzusupport)
 
 4️⃣ <b>{title4[:100]}</b>
 ├ 💡 [More Information](https://t.me/{BOT_USERNAME}?start=info_{ID4})
 ├ ⚡ **Powered by :** [{BOT_NAME}](t.me/{BOT_USERNAME})
-└ ☕ **manage by :** [𝐚𝐫𝐢](https://t.me/SilenceSpe4ks)
+└ ☕ **manage by :**  [Skyzu](https://t.me/skyzusupport)
 
 5️⃣ <b>{title5[:100]}</b>
 ├ 💡 [More Information](https://t.me/{BOT_USERNAME}?start=info_{ID5})
 ├ ⚡ **Powered by :** [{BOT_NAME}](t.me/{BOT_USERNAME})
-└ ☕ **Manage by :** [𝐚𝐫𝐢](https://t.me/SilenceSpe4ks)
+└ ☕ **Manage by :**  [Skyzu](https://t.me/skyzusupport)
 """,
             reply_markup=InlineKeyboardMarkup(buttons),
         )
