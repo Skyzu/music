@@ -97,14 +97,14 @@ async def closesmex(_, CallbackQuery):
     except Exception as e:
         await CallbackQuery.message.edit(
             f"""
-Terjadi kesalahan
-Kemungkinan alasannya bisa** :{e}
+Terjadi kesalahan nih
+Kemungkinan karena alasannya bisa :{e}
 """
         )
         return
     if CallbackQuery.from_user.id != int(user_id):
         await CallbackQuery.answer(
-            "Anda tidak diizinkan untuk menutup memu ini", show_alert=True
+            "❌ Maap! anda tidak diizinkan untuk menutup menu ini", show_alert=True
         )
         return
     await CallbackQuery.message.delete()
@@ -118,7 +118,7 @@ async def pausevc(_, CallbackQuery):
     )
     if not a.can_manage_voice_chats:
         return await CallbackQuery.answer(
-            "Anda tidak memiliki izin yang diperlukan untuk melakukan tindakan ini.\n• ❌ MENGELOLA OBROLAN SUARA",
+            "• ❌ Anda tidak memiliki izin yang diperlukan untuk melakukan tindakan ini.\n• ❌ MENGELOLA OBROLAN SUARA",
             show_alert=True,
         )
     CallbackQuery.from_user.first_name
@@ -127,19 +127,19 @@ async def pausevc(_, CallbackQuery):
         if await is_music_playing(chat_id):
             await music.pytgcalls.pause_stream(chat_id)
             await music_off(chat_id)
-            await CallbackQuery.answer("Voicechat Paused", show_alert=True)
+            await CallbackQuery.answer("⏸ Music Di Jeda?..", show_alert=True)
             user_id = CallbackQuery.from_user.id
             user_name = CallbackQuery.from_user.first_name
             rpk = "[" + user_name + "](tg://user?id=" + str(user_id) + ")"
             await CallbackQuery.message.reply(
-                f"🎧 Lagu Dijeda oleh {rpk}!", reply_markup=play_keyboard
+                f"⏸ Music Dijeda oleh {rpk}", reply_markup=play_keyboard
             )
             await CallbackQuery.message.delete()
         else:
-            await CallbackQuery.answer(f"Tidak ada yang diputar!", show_alert=True)
+            await CallbackQuery.answer(f"Tidak ada music yang diputar!..", show_alert=True)
             return
     else:
-        await CallbackQuery.answer(f"Tidak ada yang diputar di Musik!", show_alert=True)
+        await CallbackQuery.answer(f"Tidak ada music yang diputar!..", show_alert=True)
 
 
 @Client.on_callback_query(filters.regex("resumevc"))
@@ -150,8 +150,7 @@ async def resumevc(_, CallbackQuery):
     if not a.can_manage_voice_chats:
         return await CallbackQuery.answer(
             """
-Anda tidak memiliki izin yang diperlukan untuk melakukan tindakan ini.
-
+Maap! anda tidak memiliki izin yang diperlukan untuk melakukan tindakan ini.
 • ❌ MENGELOLA OBROLAN SUARA
 """,
             show_alert=True,
@@ -161,23 +160,23 @@ Anda tidak memiliki izin yang diperlukan untuk melakukan tindakan ini.
     if await is_active_chat(chat_id):
         if await is_music_playing(chat_id):
             await CallbackQuery.answer(
-                "Saya tidak berpikir jika ada sesuatu yang dijeda di obrolan suara",
+                "LOL!!! Jelas jelas gak ada music yang diputar, ngapain di end ?",
                 show_alert=True,
             )
             return
         else:
             await music_on(chat_id)
             await music.pytgcalls.resume_stream(chat_id)
-            await CallbackQuery.answer("Dilanjutkan", show_alert=True)
+            await CallbackQuery.answer("Music Dilanjutkan lagi", show_alert=True)
             user_id = CallbackQuery.from_user.id
             user_name = CallbackQuery.from_user.first_name
             rpk = "[" + user_name + "](tg://user?id=" + str(user_id) + ")"
             await CallbackQuery.message.reply(
-                f"🎧 Lagu Dilanjutkan oleh {rpk}!", reply_markup=play_keyboard
+                f"▶️ Music Dilanjutkan lagi Oleh {rpk}", reply_markup=play_keyboard
             )
             await CallbackQuery.message.delete()
     else:
-        await CallbackQuery.answer(f"Tidak ada yang diputar!", show_alert=True)
+        await CallbackQuery.answer(f"Tidak ada music yang diputar!..", show_alert=True)
 
 
 @Client.on_callback_query(filters.regex("skipvc"))
@@ -208,11 +207,10 @@ Anda tidak memiliki izin yang diperlukan untuk melakukan tindakan ini
             await CallbackQuery.answer()
             await CallbackQuery.message.reply(
                 f"""
-**Tombol Lewati Digunakan Oleh** {rpk}
+**Tombol Skip Di Tekan Oleh** {rpk}
 
-Tidak ada lagi lagu di Antrian
-
-Meninggalkan Obrolan Suara
+❎ **Tidak Ada Lagu Di Dalam Daftar Antrian**
+`Assistant Telah Meninggalkan Obrolan Suara` ✅
 """
             )
             await music.pytgcalls.leave_group_call(chat_id)
@@ -227,7 +225,7 @@ Meninggalkan Obrolan Suara
             if str(finxx) != "raw":
                 mystic = await CallbackQuery.message.reply(
                     """
-Musik sedang diputar Daftar Putar....
+Memutar Musik Dari Daftar Putar....
 
 Mengunduh Musik Berikutnya Dari Daftar Putar....
 """
@@ -329,12 +327,13 @@ Gagal mengunduh video ini.
                     reply_markup=InlineKeyboardMarkup(buttons),
                     caption=(
                         f"""
-<b>⏭️ Melewati lagu permintaa {rpk}</b>
+<b>⏭️ Melewati lagu atas permintaan {rpk}</b>
 
-<b>🏷 Nama: </b>[{title[:25]}]({url})
+<b>🏷 Nama: </b>[{title[:70]}]({url})
 <b>⏱️ Durasi: :</b> {duration}
 <b>🎧 Atas permintaan:</b> {semx.mention}
-"""
+<b>⚡ Powered by :</b> [𝐒𝐭𝐞𝐫𝐞𝐨 𝐏𝐫𝐨𝐣𝐞𝐜𝐭](https://t.me/infobotmusik)
+""",
                     ),
                 )
                 os.remove(thumb)
@@ -374,11 +373,12 @@ Gagal mengunduh video ini.
                     photo=f"downloads/{_chat_}final.png",
                     reply_markup=InlineKeyboardMarkup(buttons),
                     caption=f"""
-<b>⏭️ Melewati lagu permintaa: {rpk}</b>
+<b>⏭️ Melewati lagu atas permintaan: {rpk}</b>
 
 <b>🏷️ Nama:</b> {title}
 <b>⌚ Durasi</b> {duration}
 <b>🎧 Atas permintaan:</b> {username}
+<b>⚡ Powered by :</b> [𝐒𝐭𝐞𝐫𝐞𝐨 𝐏𝐫𝐨𝐣𝐞𝐜𝐭](https://t.me/infobotmusik)
 """,
                 )
                 return
@@ -412,7 +412,7 @@ async def stopvc(_, CallbackQuery):
         rpk = "[" + user_name + "](tg://user?id=" + str(user_id) + ")"
         await CallbackQuery.message.reply(f"🎧 Lagu Dihentikan oleh {rpk}!")
     else:
-        await CallbackQuery.answer(f"Tidak ada yang diputar!", show_alert=True)
+        await CallbackQuery.answer(f"Tidak ada music yang diputar!", show_alert=True)
 
         
 @Client.on_callback_query(filters.regex("play_playlist"))
@@ -537,7 +537,7 @@ Personal Playlist Playing."""
                     m = await CallbackQuery.message.reply_photo(
                     photo=thumb,
                     reply_markup=InlineKeyboardMarkup(buttons),    
-                    caption=(f"🎥<b>__Playing:__ </b>[{title[:25]}]({url}) \n⏳<b>__Duration:__</b> {duration} \n💡<b>__Info:__</b> [Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{videoid})\n👤**__Requested by:__** {checking}")
+                    caption=(f"🎥<b>**Memutar:** </b>[{title[:70]}]({url}) \n⏱️<b>**Durasi:**</b> `{duration}` \n💡<b>**Status:**</b> [Cek Informasi](https://t.me/{BOT_USERNAME}?start=info_{videoid})\n👤**Atas permintaan:** {checking}")
                 )   
                     os.remove(thumb)
                     await CallbackQuery.message.delete()
@@ -559,7 +559,7 @@ Personal Playlist Playing."""
                     a1,
                 ],
                 [
-                    InlineKeyboardButton(text="🗑 Close Menu​", callback_data=f'close2')
+                    InlineKeyboardButton(text="❌ Tutup ❌", callback_data=f'close2')
                 ]    
             ]
         )
@@ -683,13 +683,13 @@ Group Playlist Playing."""
                     m = await CallbackQuery.message.reply_photo(
                     photo=thumb,
                     reply_markup=InlineKeyboardMarkup(buttons),    
-                    caption=(f"🎥<b>__Playing:__ </b>[{title[:25]}]({url}) \n⏳<b>__Duration:__</b> {duration} \n⚡<b>__Info:__</b> [Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{videoid})\n👤**__Requested by:__** {checking}")
+                    caption=(f"🎥<b>**Memutar:** </b>[{title[:70]}]({url}) \n⏱️<b>**Durasi:**</b> `{duration}` \n💡<b>**Status:**</b> [Cek Informasi](https://t.me/{BOT_USERNAME}?start=info_{videoid})\n👤**Atas permintaan:** {checking}")
                 )   
                     os.remove(thumb)
                     await CallbackQuery.message.delete()
         await asyncio.sleep(1)
         await mystic.delete()
-        m = await CallbackQuery.message.reply_text("Pasting Queued Playlist to Bin")
+        m = await CallbackQuery.message.reply_text("Menampilkan daftar putar antrian ke dalam grup")
         link = await paste(msg)
         preview = link + "/preview.png"
         urlxp = link + "/index.txt"
@@ -706,14 +706,14 @@ Group Playlist Playing."""
                     a1,
                 ],
                 [
-                    InlineKeyboardButton(text="🗑 Close Menu​", callback_data=f'close2')
+                    InlineKeyboardButton(text="❌ Tutup ❌​", callback_data=f'close2')
                 ]    
             ]
         )
         if await isPreviewUp(preview):
             try:
                 await CallbackQuery.message.reply_photo(
-                    photo=preview, caption=f"This is Queued Playlist of Your Group.\n\nIf you want to delete any music from playlist use : /delgroupplaylist", quote=False, reply_markup=key
+                    photo=preview, caption=f"Antrian daftar putar grup Anda.\n\nJika Anda ingin menghapus musik apapun dari pemutaran daftar putar : /delgroupplaylist", quote=False, reply_markup=key
                 )
                 await m.delete()
             except Exception:
@@ -850,7 +850,7 @@ async def P_list(_,CallbackQuery):
         user_id = CallbackQuery.from_user.id
         user_name = CallbackQuery.from_user.first_name
         a2 = InlineKeyboardButton(text=f"Play {user_name[:17]}'s Playlist", callback_data=f'play_playlist {user_id}|personal')
-        a3 = InlineKeyboardButton(text=f"📨 Check Playlist", url=urlxp)
+        a3 = InlineKeyboardButton(text=f"📨 Memeriksa daftar putar", url=urlxp)
         key = InlineKeyboardMarkup(
             [
                 [
@@ -858,7 +858,7 @@ async def P_list(_,CallbackQuery):
                 ],
                 [
                     a3,
-                    InlineKeyboardButton(text="🗑 Close Menu", callback_data=f'close2')
+                    InlineKeyboardButton(text="❌ Tutup ❌", callback_data=f'close2')
                 ]    
             ]
         )
@@ -884,7 +884,7 @@ async def G_list(_,CallbackQuery):
     user_id = CallbackQuery.from_user.id
     _playlist = await get_note_names(CallbackQuery.message.chat.id)
     if not _playlist:
-        return await CallbackQuery.answer(f"You have no Group Playlist on servers. Try adding musics in playlist.", show_alert=True)
+        return await CallbackQuery.answer(f"Anda tidak memiliki daftar putar grup di server.Coba tambahkan musik di dalam daftar putar", show_alert=True)
     else:
         await CallbackQuery.answer()
         j = 0
@@ -894,18 +894,18 @@ async def G_list(_,CallbackQuery):
             _note = await get_playlist(CallbackQuery.message.chat.id, note)
             title = _note["title"]
             duration = _note["duration"]
-            msg += f"{j}- {title[:60]}\n"
+            msg += f"{j}- {title[:70]}\n"
             msg += f"    Duration- {duration} Min(s)\n\n"
         await CallbackQuery.answer()
         await CallbackQuery.message.delete()
-        m = await CallbackQuery.message.reply_text("Pasting Playlist to Bin")
+        m = await CallbackQuery.message.reply_text("Menampilkan daftar putar ke bin")
         link = await paste(msg)
         preview = link + "/preview.png"
         urlxp = link + "/index.txt"
         user_id = CallbackQuery.from_user.id
         user_name = CallbackQuery.from_user.first_name
         a1 = InlineKeyboardButton(text=f"Play Group's Playlist", callback_data=f'play_playlist {user_id}|group')
-        a3 = InlineKeyboardButton(text=f"📨 Check Playlist", url=urlxp)
+        a3 = InlineKeyboardButton(text=f"📨 Memeriksa daftar putar", url=urlxp)
         key = InlineKeyboardMarkup(
             [
                 [
@@ -913,7 +913,7 @@ async def G_list(_,CallbackQuery):
                 ],
                 [
                     a3,
-                    InlineKeyboardButton(text="🗑 Close Menu", callback_data=f'close2')
+                    InlineKeyboardButton(text="❌ Tutup ❌", callback_data=f'close2')
                 ]    
             ]
         )
@@ -936,17 +936,17 @@ async def G_list(_,CallbackQuery):
 async def cbgroupdel(_,CallbackQuery):  
     a = await app.get_chat_member(CallbackQuery.message.chat.id , CallbackQuery.from_user.id)
     if not a.can_manage_voice_chats:
-        return await CallbackQuery.answer("You don't have the required permission to perform this action.\nPermission: MANAGE VOICE CHATS", show_alert=True)
+        return await CallbackQuery.answer("Anda tidak memiliki izin yang diperlukan untuk melakukan tindakan ini..\nPerijinan: Kelola obrolan suara", show_alert=True)
     await CallbackQuery.message.delete() 
     await CallbackQuery.answer()
     _playlist = await get_note_names(CallbackQuery.message.chat.id)                                    
     if not _playlist:
-        return await CallbackQuery.message.reply_text("Group has no Playlist on Music's Server")
+        return await CallbackQuery.message.reply_text("Grup tidak memiliki daftar putar di server musik")
     else:
         titlex = []
         for note in _playlist:
             await delete_playlist(CallbackQuery.message.chat.id, note)
-    await CallbackQuery.message.reply_text("Successfully deleted your Group's whole playlist")  
+    await CallbackQuery.message.reply_text("Berhasil dihapus seluruh daftar putar grup Anda")  
     
     
 @Client.on_callback_query(filters.regex("cbdel"))
@@ -955,9 +955,9 @@ async def delplcb(_,CallbackQuery):
     await CallbackQuery.message.delete() 
     _playlist = await get_note_names(CallbackQuery.from_user.id)                                    
     if not _playlist:
-        return await CallbackQuery.message.reply_text("You have no Playlist on Music's Server")
+        return await CallbackQuery.message.reply_text("Anda tidak memiliki daftar putar di server musik")
     else:
         titlex = []
         for note in _playlist:
             await delete_playlist(CallbackQuery.from_user.id, note)
-    await CallbackQuery.message.reply_text("Successfully deleted your whole playlist")
+    await CallbackQuery.message.reply_text("Berhasil dihapus seluruh daftar putar anda")
