@@ -12,7 +12,7 @@ def AdminRightsCheck(mystic):
     async def wrapper(_, message):
         if message.sender_chat:
             return await message.reply_text(
-                "You're an __Anonymous Admin__!\nRevert back to User Account."
+                "Akun Anda Adalah Admin Anonim!\nUbah Ke Akun Admin Pengguna dulu."
             )
         is_non_admin = await is_nonadmin_chat(message.chat.id)
         if not is_non_admin:
@@ -25,7 +25,7 @@ def AdminRightsCheck(mystic):
                     _check = await get_authuser_names(message.chat.id)
                     if token not in _check:
                         return await message.reply(
-                            "You don't have the required permission to perform this action.\n\n__REQUIRES ADMIN WITH MANAGE VC RIGHTS__"
+                            "Anda tidak memiliki izin yang diperlukan untuk melakukan tindakan ini..\n\n__Membutuhkan admin dengan mengelola VCG__"
                         )
         return await mystic(_, message)
 
