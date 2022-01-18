@@ -1,21 +1,10 @@
 from asyncio import QueueEmpty
 from pyrogram import Client, filters
-from pyrogram.types import (
-    Message,
-    Audio,
-    Voice,
-)
+from pyrogram.types import Message, Audio, Voice
 from Music import app
 from Music.MusicUtilities.helpers.decorators import errors
 from Music.MusicUtilities.helpers.filters import command, other_filters
-from Music.MusicUtilities.database.queue import (
-    is_active_chat,
-    add_active_chat,
-    remove_active_chat,
-    music_on,
-    is_music_playing,
-    music_off,
-)
+from Music.MusicUtilities.database.queue import is_active_chat, add_active_chat, remove_active_chat, music_on, is_music_playing, music_off
 from pyrogram.types import (
     CallbackQuery,
     InlineKeyboardButton,
@@ -32,50 +21,21 @@ import asyncio
 import shutil
 from time import time
 import time as sedtime
-from Music import (
-    dbb,
-    app,
-    BOT_USERNAME,
-    BOT_ID,
-    ASSID,
-    ASSNAME,
-    ASSUSERNAME,
-    ASSMENTION,
-)
-from Music.MusicUtilities.tgcallsrun import (
-    clear,
-    convert,
-    download,
-    clear,
-    get,
-    is_empty,
-    music,
-    task_done,
-    smexy,
-)
-from Music.MusicUtilities.helpers.gets import (
-    get_url,
-    themes,
-    random_assistant,
-)
+from Music import app, dbb, ASSNAME, ASSID, ASSUSERNAME, ASSMENTION, BOT_ID, BOT_USERNAME
+from Music.MusicUtilities.tgcallsrun import clear, convert, download, clear, get, music, is_empty, task_done, smexy
+from Music.MusicUtilities.helpers.gets import get_url, themes, random_assistant
 from pyrogram.types import Message
 from pytgcalls.types.input_stream import InputAudioStream
 from pytgcalls.types.input_stream import InputStream
 from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
-from Music.MusicUtilities.helpers.inline import (
-    play_markup,
-    audio_markup,
-)
+from Music.MusicUtilities.helpers.inline import play_markup, audio_markup
 from Music.MusicUtilities.tgcallsrun import (convert, download)
 from pyrogram import filters
 from typing import Union
 from youtubesearchpython import VideosSearch
-from pyrogram.errors import (
-    UserAlreadyParticipant,
-    UserNotParticipant,
-)
+from pyrogram.errors import UserAlreadyParticipant, UserNotParticipant
 
 flex = {}
 
@@ -99,12 +59,12 @@ async def stop_cmd(_, message):
         await music.pytgcalls.leave_group_call(chat_id)
     except:
         pass   
-    await message.reply_text("Menghapus Databae, Antrian, Log, File Mentah, Unduhan.")
+    await message.reply_text("**Menghapus Database.**\n**Antrian, Log.**\n**File Mentah,Dan Unduhan.**")
     
 @app.on_message(filters.command(["pause", f"pause@{BOT_USERNAME}", "ps"]))
 async def pause_cmd(_, message): 
     if message.sender_chat:
-        return await message.reply_text("Kamu adalah __Admin Anonim__!\nKembalikan ke Akun Pengguna.") 
+        return await message.reply_text("Kamu adalah `Admin Anonim!`\nKembalikan ke Akun Pengguna.") 
     permission = "can_manage_voice_chats"
     m = await adminsOnly(permission, message)
     if m == 1:
@@ -112,17 +72,17 @@ async def pause_cmd(_, message):
     checking = message.from_user.mention
     chat_id = message.chat.id
     if not await is_active_chat(chat_id):
-        return await message.reply_text("Saya tidak berpikir jika ada sesuatu yang diputar di obrolan suara")
+        return await message.reply_text("❎ Tidak ada music yang diputar di obrolan suara atau VCG")
     elif not await is_music_playing(message.chat.id):
-        return await message.reply_text("Saya tidak berpikir jika ada sesuatu yang diputar di obrolan suara")   
+        return await message.reply_text("❎ Tidak ada music yang diputar di obrolan suara atau VCG")   
     await music_off(chat_id)
     await music.pytgcalls.pause_stream(chat_id)
-    await message.reply_text(f"🎧 Obrolan Suara Dijeda oleh {checking}!")
+    await message.reply_text(f"⏸ Music Dijeda Oleh {checking}")
     
 @app.on_message(filters.command(["resume", f"resume@{BOT_USERNAME}", "rs"]))
 async def stop_cmd(_, message): 
     if message.sender_chat:
-        return await message.reply_text("Kamu adalah __Admin Anonim__!\nKembalikan ke Akun Pengguna.") 
+        return await message.reply_text("Kamu adalah `Admin Anonim!`\nKembalikan ke Akun Pengguna.") 
     permission = "can_manage_voice_chats"
     m = await adminsOnly(permission, message)
     if m == 1:
@@ -130,18 +90,18 @@ async def stop_cmd(_, message):
     checking = message.from_user.mention
     chat_id = message.chat.id
     if not await is_active_chat(chat_id):
-        return await message.reply_text("Saya tidak berpikir jika ada sesuatu yang diputar di obrolan suara")
+        return await message.reply_text("❎ Tidak ada music yang diputar di obrolan suara atau VCG")
     elif await is_music_playing(chat_id):
-        return await message.reply_text("Saya tidak berpikir jika ada sesuatu yang diputar di obrolan suara") 
+        return await message.reply_text("❎ Tidak ada music yang diputar di obrolan suara atau VCG") 
     else:
         await music_on(chat_id)
         await music.pytgcalls.resume_stream(chat_id)
-        await message.reply_text(f"**🎧 Obrolan Suara Dilanjutkan Oleh {checking}!**")
+        await message.reply_text(f"**▶️ Music Dilanjutkan Lagi Oleh {checking}**")
 
 @app.on_message(filters.command(["end", f"end@{BOT_USERNAME}", "e"]))
 async def stop_cmd(_, message): 
     if message.sender_chat:
-        return await message.reply_text("Kamu adalah __Admin Anonim__!\nKembalikan ke Akun Pengguna.") 
+        return await message.reply_text("Kamu adalah `Admin Anonim!`\nKembalikan ke Akun Pengguna.") 
     permission = "can_manage_voice_chats"
     m = await adminsOnly(permission, message)
     if m == 1:
@@ -155,14 +115,14 @@ async def stop_cmd(_, message):
             pass                        
         await remove_active_chat(chat_id)
         await music.pytgcalls.leave_group_call(chat_id)
-        await message.reply_text(f"**🎧 Obrolan Suara Berakhir/Dihentikan {checking}!**") 
+        await message.reply_text(f"**❌ Music Telah Dimatikan Oleh {checking}**") 
     else:
-        return await message.reply_text("Saya tidak berpikir jika ada sesuatu yang diputar di obrolan suara")
+        return await message.reply_text("❎ Tidak ada music yang diputar di obrolan suara atau VCG")
     
 @app.on_message(filters.command(["skip", f"skip@{BOT_USERNAME}", "sk"]))
 async def stop_cmd(_, message): 
     if message.sender_chat:
-        return await message.reply_text("Kamu adalah __Admin Anonim__!\nKembalikan ke Akun Pengguna.") 
+        return await message.reply_text("Kamu adalah `Admin Anonim!`\nUbah ke Akun Pengguna.") 
     permission = "can_manage_voice_chats"
     m = await adminsOnly(permission, message)
     if m == 1:
@@ -171,12 +131,12 @@ async def stop_cmd(_, message):
     chat_id = message.chat.id
     chat_title = message.chat.title
     if not await is_active_chat(chat_id):
-        await message.reply_text("Tidak ada music yang diputar")
+        await message.reply_text("**❎ Tidak ada music yang sedang diputar di obrolan suara atau VCG !**")
     else:
         task_done(chat_id)
         if is_empty(chat_id):
             await remove_active_chat(chat_id)
-            await message.reply_text("Tidak ada lagi musik di __Queue__ \n\nMeninggalkan Obrolan Suara")
+            await message.reply_text("**Tidak ada lagi music di Daftar antrian**\n\nAssistant Bot Music Telah Meninggalkan Obrolan Suara..")
             await music.pytgcalls.leave_group_call(chat_id)
             return  
         else:
@@ -186,7 +146,7 @@ async def stop_cmd(_, message):
             f3 = (afk[2])
             finxx = (f"{f1}{f2}{f3}")
             if str(finxx) != "raw":   
-                mystic = await message.reply_text("Musik sedang diputar Daftar Putar...\n\nMengunduh Musik Berikutnya Dari Daftar Putar....")
+                mystic = await message.reply_text("Musik sedang diputar, Daftar Putar...\n\nMengunduh Musik Berikutnya Dari Daftar Putar....")
                 url = (f"https://www.youtube.com/watch?v={afk}")
                 try:
                     with yt_dlp.YoutubeDL(ytdl_opts) as ytdl:
@@ -211,25 +171,25 @@ async def stop_cmd(_, message):
                         if flex[str(bytesx)] == 1:
                             flex[str(bytesx)] += 1
                             sedtime.sleep(1)
-                            mystic.edit(f"Downloading {title[:50]}\n\n**File Size:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec")
+                            mystic.edit(f"Sedang Mendownload {title[:70]}\n\n**Ukuruan File :** {size}\n**Mendownload :** {percentage}\n**Kecepatan :** {speed}\n**ETA:** {eta} detik")
                         if per > 500:    
                             if flex[str(bytesx)] == 2:
                                 flex[str(bytesx)] += 1
                                 sedtime.sleep(0.5)
-                                mystic.edit(f"Downloading {title[:50]}...\n\n**File Size:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec")
-                                print(f"[{videoid}] Downloaded {percentage} at a speed of {speed} in {chat_title} | ETA: {eta} seconds")
+                                mystic.edit(f"Sedang Mendownload {title[:70]}...\n\n**Ukuran File :** {size}\n**Mendownload :** {percentage}\n**Kecepatan :** {speed}\n**ETA:** {eta} detik")
+                                print(f"[{videoid}] Mendownload {percentage} dengan kecepatan {speed} di {chat_title} | ETA: {eta} detik")
                         if per > 800:    
                             if flex[str(bytesx)] == 3:
                                 flex[str(bytesx)] += 1
                                 sedtime.sleep(0.5)
-                                mystic.edit(f"Downloading {title[:50]}....\n\n**File Size:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec")
-                                print(f"[{videoid}] Downloaded {percentage} at a speed of {speed} in {chat_title} | ETA: {eta} seconds")
+                                mystic.edit(f"Sedang Mendownload {title[:70]}....\n\n**Ukuran File :** {size}\n**Mendownload :** {percentage}\n**Kecepatan :** {speed}\n**ETA:** {eta} detik")
+                                print(f"[{videoid}] Mendownload {percentage} dengan kecepatan {speed} di {chat_title} | ETA: {eta} detik")
                         if per == 1000:    
                             if flex[str(bytesx)] == 4:
                                 flex[str(bytesx)] = 1
                                 sedtime.sleep(0.5)
-                                mystic.edit(f"Downloading {title[:50]}.....\n\n**File Size:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec") 
-                                print(f"[{videoid}] Downloaded {percentage} at a speed of {speed} in {chat_title} | ETA: {eta} seconds")
+                                mystic.edit(f"Sedang Mendownload {title[:70]}.....\n\n**Ukuran File :** {size}\n**Mendownload :** {percentage}\n**Kecepatan :** {speed}\n**ETA:** {eta} detik") 
+                                print(f"[{videoid}] Mendownload {percentage} dengan kecepatan {speed} di {chat_title} | ETA: {eta} detik")
                 loop = asyncio.get_event_loop()
                 xxx = await loop.run_in_executor(None, download, url, my_hook)
                 file = await convert(xxx)
@@ -257,15 +217,14 @@ async def stop_cmd(_, message):
                 await message.reply_photo(
                 photo=thumb,
                     reply_markup=InlineKeyboardMarkup(buttons),
-                    caption=(
-                        f"""
-<b>⏭️ Melewati lagu</b>
+                    caption=f"""
+<b>⏭️ 𝐌𝐞𝐥𝐞𝐰𝐚𝐭𝐢 𝐩𝐞𝐦𝐮𝐭𝐚𝐫𝐚𝐧 𝐥𝐚𝐠𝐮 </b>
 
-<b>🏷 Nama:</b>[{title[:25]}]({url})
-<b>⏱️ Durasi:</b> {duration}
-<b>🎧 Atas permintaan:</b> {semx.mention}
-"""
-                    ),
+<b>🏷 𝐍𝐚𝐦𝐚 :</b>{title[:70]}
+<b>⏱️ 𝐃𝐮𝐫𝐚𝐬𝐢 :</b> {duration} `Menit`
+<b>🎧 𝐀𝐭𝐚𝐬 𝐩𝐞𝐫𝐦𝐢𝐧𝐭𝐚𝐚𝐧 :</b> {semx.mention}
+<b>⚡ 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐛𝐲 :</b>[𝐒𝐭𝐞𝐫𝐞𝐨 𝐏𝐫𝐨𝐣𝐞𝐜𝐭](https://t.me/infobotmusik)
+""",
                 )
                 os.remove(thumb)
             else:      
@@ -296,11 +255,21 @@ async def stop_cmd(_, message):
                 photo=f"downloads/{_chat_}final.png",
                     reply_markup=InlineKeyboardMarkup(buttons),
                     caption=f"""
-<b>⏭️ Melewati lagu</b>
+<b>⏭️ Melewati Pemutaran Lagu </b>
 
-<b>🏷️ Nama:</b> {title}
-<b>⏱️ Durasi:</b> {duration}
-<b>🎧 Atas permintaan</b> {username}
+<b>🏷️ Nama :</b>{title[:70]}
+<b>⏱️ Durasi :</b> `{duration}` `Menit`
+<b>🎧 Atas Permintaan :</b> {username}
+<b>⚡ powered by :</b>[𝐒𝐭𝐞𝐫𝐞𝐨 𝐏𝐫𝐨𝐣𝐞𝐜𝐭](https://t.me/infobotmusik)
 """,
                 )
                 return
+
+@app.on_message(filters.command(["reload", f"reload@{BOT_USERNAME}"]))
+async def reload(_, message):
+    chat_id = message.chat.id
+    await _.send_message(
+    chat_id,
+    "✅ 𝘽𝙤𝙩 𝙢𝙪𝙨𝙞𝙘 𝙗𝙚𝙧𝙝𝙖𝙨𝙞𝙡 𝙙𝙞𝙢𝙪𝙡𝙖𝙞 𝙪𝙡𝙖𝙣𝙜.\n\n✅ 𝘿𝙖𝙛𝙩𝙖𝙧 𝙖𝙙𝙢𝙞𝙣 𝙩𝙚𝙡𝙖𝙝 𝙙𝙞𝙥𝙚𝙧𝙗𝙖𝙧𝙪𝙞."
+)
+
