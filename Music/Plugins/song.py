@@ -69,7 +69,7 @@ Kembalikan ke Akun Pengguna Dari Hak Admin.
         buttons = gets(videoid, user_id)
         m = await message.reply_text(
             f"""
-<b>🏷️ Judul:</b> [{title[:25]}]({url})
+<b>🏷️ Judul:</b> [{title[:20]}]({url})
 <b>💡</b> [More Information](https://t.me/{BOT_USERNAME}?start=info_{id})
 <b>⚡ Didukung</b> [{BOT_NAME}](t.me/{BOT_USERNAME})
 """,
@@ -286,7 +286,7 @@ async def chonga(_, CallbackQuery):
         )
         await CallbackQuery.edit_message_text(
             f"""
-<b>✨ Silahkan Pilih Maba Yang Ingin Didownload</b>
+<b>✨ Silahkan Pilih Mana Yang Ingin Didownload</b>
 
 
 ⁶ <b>{title6[:20]}</b>
