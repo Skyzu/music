@@ -49,3 +49,4 @@ async def theme_func(_, message):
         f"python{str(pyver.split(' ')[0])[:3]}",
         [f"python{str(pyver.split(' ')[0])[:3]}", "-m", "Music"],
     )
+
